@@ -324,8 +324,8 @@ baker.make_pizza(
 )
 
 fig1.text(
-    0.515, 0.73,s=f"Percentile ranks for {league_choice} - {position_choice}", size=24,fontfamily=font,
-    ha="center", color=textc
+    0.05, 0.73,s=f"Percentile ranks for {league_choice} - {position_choice}", size=24,fontfamily=font,
+    color=textc
 )
 
 fig1.text(
