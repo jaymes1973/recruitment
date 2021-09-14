@@ -128,8 +128,8 @@ player2_choice = st.sidebar.selectbox(
 
 players_hold=df1['Player']
 
-num_cols = df1.select_dtypes([np.number]).columns
-rankdf = df1[num_cols].rank(0,ascending=True, pct=True,method='average')*100
+num_cols = df1_1.select_dtypes([np.number]).columns
+rankdf = df1_1[num_cols].rank(0,ascending=True, pct=True,method='average')*100
 rankdf=pd.DataFrame(rankdf, columns=[param1,param2,param3,param4,param5,param6,
                                param7,param8,param9,param10,param11,param12,param13,param14])
 rankdf=pd.concat([players_hold,rankdf], axis=1).reset_index(drop=True)
