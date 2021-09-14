@@ -101,8 +101,8 @@ metric2 = st.sidebar.selectbox(
     "Choose a metric (Scatter plot):", metrics, index=1)
 
 
-age_min =df1['Age'].min()
-age_max =df1['Age'].max()
+age_min =int(df1['Age'].min())
+age_max =int(df1['Age'].max())
 min_age, max_age = st.sidebar.slider(
     'Filter by age:',age_min,age_max,(age_min,age_max))
 
@@ -110,8 +110,8 @@ df1=df1.loc[(df1['Age'] >= min_age)]
 df1=df1.loc[(df1['Age'] <= max_age)]
 
 
-height_min =df1['Height'].min()
-height_max =df1['Height'].max()
+height_min =int(df1['Height'].min())
+height_max =int(df1['Height'].max())
 min_height, max_height = st.sidebar.slider(
     'Filter by height (cm):',height_min,height_max,(height_min,height_max))
 
