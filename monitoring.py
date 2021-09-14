@@ -88,7 +88,7 @@ df1=df1.loc[(df1['Focus Position'] == position_choice)]
 
 df1_1=df1.reset_index(drop=True)
 
-df2=df1.iloc[:,9:]
+df2=df1.iloc[:,10:]
 metrics=df2.columns.tolist()
 remove=['Birth country','Passport country','Foot','Height','Weight','On loan','League',
         'Focus Position','Rank','Status', 'color']
