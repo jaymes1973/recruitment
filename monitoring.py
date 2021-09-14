@@ -7,7 +7,7 @@ from highlight_text import ax_text, fig_text
 from adjustText import adjust_text
 from mplsoccer import PyPizza
 
-data="/Users/jaymesmonte/Desktop/rec2.csv" 
+data="rec2.csv" 
 image1="DUFCcrest_small.png"
 
 st.set_page_config(
