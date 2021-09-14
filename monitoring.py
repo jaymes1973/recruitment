@@ -330,7 +330,7 @@ fig1.text(
 )
 
 fig1.text(
-    0.05, 0.68,s=f"The percentile rank shows where the player ranks for each attribute\ncompared to his peers and on a scale of 1-100.", size=16,fontfamily=font,
+    0.05, 0.68,s=f"The percentile rank shows where the player ranks for each attribute\ncompared to his peers on a scale of 1-100.", size=16,fontfamily=font,
      color=textc
 )
 
