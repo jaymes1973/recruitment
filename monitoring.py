@@ -84,8 +84,6 @@ df1=df1.loc[(df1['Focus Position'] == position_choice)]
 
 df1_1=df1
 
-players_hold=df1_1['Player']
-
 df2=df1.iloc[:,10:]
 metrics=df2.columns.tolist()
 remove=['Birth country','Passport country','Foot','Height','Weight','On loan','League',
@@ -120,7 +118,7 @@ df1=df1.loc[(df1['Height'] <= max_height)]
 
 st.sidebar.write("Choose players to compare:")
 
-player1 = list(df1_1['Player'].drop_duplicates())
+player1 = list(df1['Player'].drop_duplicates())
 player1=sorted(player1)
 player1_choice = st.sidebar.selectbox(
     "Select player 1:", player1, index=0)
@@ -128,6 +126,7 @@ player1_choice = st.sidebar.selectbox(
 player2_choice = st.sidebar.selectbox(
     "Select player 2:", player1, index=1)
 
+players_hold=df1['Player']
 
 num_cols = df1.select_dtypes([np.number]).columns
 rankdf = df1[num_cols].rank(0,ascending=True, pct=True,method='average')*100
