@@ -8,7 +8,7 @@ from adjustText import adjust_text
 from mplsoccer import PyPizza
 
 data="/Users/jaymesmonte/Desktop/rec2.csv" 
-image1="/Users/jaymesmonte/Desktop/Analytics/Dufc_Analytics/DUFCcrest_small.png"
+image1="DUFCcrest_small.png"
 
 st.set_page_config(
      page_title="Player Recruitment",
