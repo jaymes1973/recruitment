@@ -9,8 +9,6 @@ from mplsoccer import PyPizza
 
 data="rec2.csv" 
 image1="DUFCcrest_small.png"
-data="rec2.csv" 
-image1="DUFCcrest_small.png"
 
 st.set_page_config(
      page_title="Player Recruitment",
@@ -20,15 +18,6 @@ st.set_page_config(
 st.title(f"Dundee United - Player Recruitment")
 
 st.sidebar.image(image1, use_column_width=False)
-
-@st.cache(allow_output_mutation=True)
-def get_data(file):
-    df=pd.read_csv(file).fillna(0)
-    return (df)
-df=get_data(data)
-df['Contract expires'] = df['Contract expires'].astype(str)
-df["% of passes progressive"]=df["Progressive passes per 90"]/df["Passes per 90"]*100
-df=df.fillna(0)
 
 textc='#1d3557'
 linec='#808080'
@@ -63,6 +52,18 @@ param11='% of passes progressive'
 param12='xA per 90'
 param13='xG per 90'
 param14='Shots per 90'
+
+@st.cache(allow_output_mutation=True)
+def get_data(file):
+    df=pd.read_csv(file).fillna(0)
+    return (df)
+df=get_data(data)
+df['Contract expires'] = df['Contract expires'].astype(str)
+df["% of passes progressive"]=df["Progressive passes per 90"]/df["Passes per 90"]*100
+df['color'] = np.where(df['Rank']>=1, color1, color5)
+df=df.fillna(0)
+
+
 
 params = [param1,param2,param3,param4,param5,param6,
                                param7,param8,param9,param10,param11,param12,param13,param14]
@@ -188,7 +189,8 @@ max2 = df1_1[var2].max()
 min1 = df1_1[var1].min()
 min2 = df1_1[var2].min()
 
-ax1.scatter(x1, y2, color=color1,edgecolor=color1,alpha=0.5, s=100,zorder=4)
+
+ax1.scatter(x1, y2, color=df1.color,edgecolor=df1.color,alpha=0.75, s=100,zorder=4)
 
 ax1.plot([min1,max1],[mean2,mean2],color=color2,lw=50,alpha=0.25)
 ax1.plot([mean1,mean1],[min2,max2],color=color2,lw=50,alpha=0.25)
@@ -325,12 +327,12 @@ baker.make_pizza(
 )
 
 fig1.text(
-    0.05, 0.73,s=f"Percentile ranks for {league_choice} - {position_choice}", size=24,fontfamily=font,
+    0.05, 0.75,s=f"Percentile ranks for {league_choice}\n{position_choice}", size=24,fontfamily=font,
     color=textc
 )
 
 fig1.text(
-    0.05, 0.68,s=f"The percentile rank shows where the player ranks for each attribute\ncompared to his peers on a scale of 1-100.", size=16,fontfamily=font,
+    0.05, 0.68,s=f"The percentile rank shows where the player ranks for each attribute\ncompared to his peers and on a scale of 1-100.", size=16,fontfamily=font,
      color=textc
 )
 
