@@ -56,6 +56,7 @@ param14='Shots per 90'
 @st.cache(allow_output_mutation=True)
 def get_data(file):
     df=pd.read_csv(file).fillna(0)
+    df.drop(df.columns[0], axis=1, inplace=False)
     return (df)
 df=get_data(data)
 df['Contract expires'] = df['Contract expires'].astype(str)
@@ -85,12 +86,12 @@ position_choice = st.sidebar.selectbox(
     "Select a position:", positions, index=2)
 df1=df1.loc[(df1['Focus Position'] == position_choice)]
 
-df1_1=df1
+df1_1=df1.reset_index(drop=True)
 
-df2=df1.iloc[:,10:]
+df2=df1.iloc[:,9:]
 metrics=df2.columns.tolist()
 remove=['Birth country','Passport country','Foot','Height','Weight','On loan','League',
-        'Focus Position','Rank']
+        'Focus Position','Rank','Status', 'color']
 
 for ele in remove:
     metrics.remove(ele)
@@ -117,17 +118,27 @@ min_height, max_height = st.sidebar.slider(
     'Filter by height (cm):',height_min,height_max,(height_min,height_max))
 
 df1=df1.loc[(df1['Height'] >= min_height)]
-df1=df1.loc[(df1['Height'] <= max_height)]
+df1=df1.loc[(df1['Height'] <= max_height)].reset_index(drop=True)
 
 st.sidebar.write("Choose players to compare:")
 
+index = df1.index
+condition = df1["Rank"] == 1
+player_ind = index[condition]
+player_ind=player_ind.tolist()
+player_ind = int(''.join(str(i) for i in player_ind))
+condition2 = df1["Rank"] == 2
+player_ind2 = index[condition2]
+player_ind2=player_ind2.tolist()
+player_ind2 = int(''.join(str(i) for i in player_ind2))
+
 player1 = list(df1['Player'].drop_duplicates())
-player1=sorted(player1)
+#player1=sorted(player1)
 player1_choice = st.sidebar.selectbox(
-    "Select player 1:", player1, index=0)
+    "Select player 1:", player1, index=player_ind)
 
 player2_choice = st.sidebar.selectbox(
-    "Select player 2:", player1, index=1)
+    "Select player 2:", player1, index=player_ind2)
 
 players_hold=df1['Player']
 
@@ -327,7 +338,7 @@ baker.make_pizza(
 )
 
 fig1.text(
-    0.05, 0.75,s=f"Percentile ranks for {league_choice}\n{position_choice}", size=24,fontfamily=font,
+    0.05, 0.75,s=f"{league_choice} - {position_choice}", size=24,fontfamily=font,
     color=textc
 )
 
