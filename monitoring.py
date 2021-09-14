@@ -87,6 +87,7 @@ position_choice = st.sidebar.selectbox(
 df1=df1.loc[(df1['Focus Position'] == position_choice)]
 
 df1_1=df1.reset_index(drop=True)
+df1_2=df1_1
 
 df2=df1.iloc[:,10:]
 metrics=df2.columns.tolist()
@@ -122,17 +123,17 @@ df1=df1.loc[(df1['Height'] <= max_height)].reset_index(drop=True)
 
 st.sidebar.write("Choose players to compare:")
 
-index = df1.index
-condition = df1["Rank"] == 1
+index = df1_2.index
+condition = df1_2["Rank"] == 1
 player_ind = index[condition]
 player_ind=player_ind.tolist()
 player_ind = int(''.join(str(i) for i in player_ind))
-condition2 = df1["Rank"] == 2
+condition2 = df1_2["Rank"] == 2
 player_ind2 = index[condition2]
 player_ind2=player_ind2.tolist()
 player_ind2 = int(''.join(str(i) for i in player_ind2))
 
-player1 = list(df1['Player'].drop_duplicates())
+player1 = list(df1_1['Player'].drop_duplicates())
 #player1=sorted(player1)
 player1_choice = st.sidebar.selectbox(
     "Select player 1:", player1, index=player_ind)
@@ -140,7 +141,7 @@ player1_choice = st.sidebar.selectbox(
 player2_choice = st.sidebar.selectbox(
     "Select player 2:", player1, index=player_ind2)
 
-players_hold=df1['Player']
+players_hold=df1_2['Player']
 
 num_cols = df1_1.select_dtypes([np.number]).columns
 rankdf = df1_1[num_cols].rank(0,ascending=True, pct=True,method='average')*100
