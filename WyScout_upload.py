@@ -141,7 +141,7 @@ ax1.set_facecolor(bgcolor)
 
 # player names with their coordinate locations   
 
-df1_=df.loc[(df[var1] == player1_choice) | (df[var2] == player2_choice)]
+df1_=df.loc[(df["Player"] == player1_choice) | (df["Player"] == player2_choice)]
 
 text_values = df1_.loc[
     df1_["Player"].isin(players),
