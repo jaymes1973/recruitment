@@ -97,6 +97,18 @@ df=df.loc[(df['Height'] <= max_height)].reset_index(drop=True)
 
 st.subheader("")
 
+st.sidebar.write("Choose players:")
+
+
+player1 = list(dfradar['Player'].drop_duplicates())
+
+player1_choice = st.sidebar.selectbox(
+    "Select player 1:", player1, index=0)
+
+player2_choice = st.sidebar.selectbox(
+    "Select player 2:", player1, index=1)
+
+
 fig = plt.figure(figsize=(10,10),constrained_layout=True)
 gs = fig.add_gridspec(nrows=1,ncols=1)
 fig.patch.set_facecolor(bgcolor)
@@ -125,23 +137,14 @@ ax1.plot([mean1,mean1],[min2,max2],color=color2,lw=50,alpha=0.25)
 
 players=df['Player']
 
-st.sidebar.write("Choose players:")
 
-
-player1 = list(dfradar['Player'].drop_duplicates())
-
-player1_choice = st.sidebar.selectbox(
-    "Select player 1:", player1, index=0)
-
-player2_choice = st.sidebar.selectbox(
-    "Select player 2:", player1, index=1)
 
 # set the background color for the axes
 ax1.set_facecolor(bgcolor)
 
 # player names with their coordinate locations   
 
-df1_=df#.loc[(df["Player"] == player1_choice) | (df["Player"] == player2_choice)]
+df1_=df.loc[(df["Player"] == player1_choice) | (df["Player"] == player2_choice)]
 
 text_values = df1_.loc[
     df1_["Player"].isin(players),
